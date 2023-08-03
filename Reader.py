@@ -177,22 +177,22 @@ frame_buttons.pack(side=tk.LEFT, padx=10)
 
 btn_new = ttk.Button(frame_buttons, text="New File", command=create_new_txt_file, style='my.TButton')
 btn_new.pack(pady=5)
-btn_new.bind("<Enter>", button_hover)
+
 
 
 btn_delete = ttk.Button(frame_buttons, text="Delete", command=delete_selected_file, style='my.TButton')
 btn_delete.pack(pady=5)
-btn_delete.bind("<Enter>", button_hover)
+
 
 
 btn_rename = ttk.Button(frame_buttons, text="Rename", command=rename_selected_file, style='my.TButton')
 btn_rename.pack(pady=5)
-btn_rename.bind("<Enter>", button_hover)
+
 
 
 btn_refresh = ttk.Button(frame_buttons, text="Refresh", command=refresh_files_list, style='my.TButton')
 btn_refresh.pack(pady=5)
-btn_refresh.bind("<Enter>", button_hover)
+
 
 # Định nghĩa style cho button
 style.configure('my.TButton', font=('Segoe UI', 12), foreground='black', background='#1e90ff', padding=10)
