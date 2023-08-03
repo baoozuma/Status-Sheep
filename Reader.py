@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog, filedialog
 import re
 import base64
+from PIL import Image, ImageTk
 
 current_filename = ""
 konami_code_sequence = []
@@ -25,6 +26,7 @@ def extract_number_from_filename(filename):
         return float(match.group())
     return float('inf')
 
+
 def display_txt_files():
     txt_files = [file for file in os.listdir('Vol') if file.endswith('.txt')]
     if not txt_files:
@@ -36,20 +38,29 @@ def display_txt_files():
     for txt_file in txt_files:
         filename = os.path.splitext(txt_file)[0]  # Loại bỏ đuôi .txt
         files_list.insert(tk.END, filename)
+def check_image(filename):
+    image_path = f'Vol/assets/{filename}.jpg'
+    if os.path.exists(image_path):
+        return image_path
+    else:
+        return None
 
 def load_selected_file(event=None):
     global current_filename
     selected_index = files_list.curselection()
     if not selected_index:
         return
-
     filename = files_list.get(selected_index)
     try:
-        with open(f"Vol/{filename}.txt", 'r', encoding='utf-8') as file:  # Thêm mã hóa 'utf-8' khi đọc file
+        with open(f"Vol/{filename}.txt", 'r', encoding='utf-8') as file:
             content = file.read()
         text_editor.delete(1.0, tk.END)
         text_editor.insert(tk.END, content)
         current_filename = filename
+
+        image_path = check_image(filename)
+
+
     except FileNotFoundError:
         messagebox.showinfo("Thông báo", "File không tồn tại.")
 
@@ -144,7 +155,8 @@ def button_hover(event):
 
 def button_leave(event):
     event.widget.config(background="#272727")
-    
+
+
 root = tk.Tk()
 root.title("Status Sheep")
 root.geometry("800x600")
@@ -153,11 +165,12 @@ style = ttk.Style(root)
 style.theme_use("clam")  # Chọn theme, có thể thay bằng "clam", "alt", "default", "classic", "vista", "xpnative"
 style.configure(".", font=('Segoe UI', 12), foreground='white', background='#272727')  # Cấu hình font và màu cho tất cả các widget
 
-frame_top = ttk.Frame(root)
+frame_top = ttk.Frame(root,padding=(20, 20, 20, 20), borderwidth=0)
 frame_top.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
-files_list = tk.Listbox(frame_top, width=40, height=10, selectmode=tk.SINGLE, font=('Segoe UI', 12), foreground='white', background='#272727')
+files_list = tk.Listbox(frame_top, width=40, height=10, selectmode=tk.SINGLE, font=('Segoe UI', 12), foreground='white', background='#272727',borderwidth=0, selectborderwidth=0)
 files_list.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
 
 frame_buttons = ttk.Frame(frame_top)
 frame_buttons.pack(side=tk.LEFT, padx=10)
@@ -165,30 +178,32 @@ frame_buttons.pack(side=tk.LEFT, padx=10)
 btn_new = ttk.Button(frame_buttons, text="New File", command=create_new_txt_file, style='my.TButton')
 btn_new.pack(pady=5)
 btn_new.bind("<Enter>", button_hover)
-btn_new.bind("<Leave>", button_leave)
+
 
 btn_delete = ttk.Button(frame_buttons, text="Delete", command=delete_selected_file, style='my.TButton')
 btn_delete.pack(pady=5)
 btn_delete.bind("<Enter>", button_hover)
-btn_delete.bind("<Leave>", button_leave)
+
 
 btn_rename = ttk.Button(frame_buttons, text="Rename", command=rename_selected_file, style='my.TButton')
 btn_rename.pack(pady=5)
 btn_rename.bind("<Enter>", button_hover)
-btn_rename.bind("<Leave>", button_leave)
+
 
 btn_refresh = ttk.Button(frame_buttons, text="Refresh", command=refresh_files_list, style='my.TButton')
 btn_refresh.pack(pady=5)
 btn_refresh.bind("<Enter>", button_hover)
-btn_refresh.bind("<Leave>", button_leave)
 
 # Định nghĩa style cho button
 style.configure('my.TButton', font=('Segoe UI', 12), foreground='black', background='#1e90ff', padding=10)
 
-frame_bottom = ttk.Frame(root)
+frame_bottom = ttk.Frame(root,padding=(20, 20, 20, 20))
 frame_bottom.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
-text_editor = tk.Text(frame_bottom, wrap=tk.WORD, font=('Segoe UI', 12), foreground='white', background='#272727')
+
+# Áp dụng kiểu giao diện mới cho frame_bottom
+frame_bottom.configure(style="Custom.TFrame")
+text_editor = tk.Text(frame_bottom, wrap=tk.WORD, font=('Segoe UI', 12), foreground='white', background='#272727',borderwidth=0)
 text_editor.pack(fill=tk.BOTH, expand=True)
 
 text_editor.bind("<Control-s>", save_current_file)  # Bắt sự kiện gõ Ctrl + S để lưu
@@ -200,4 +215,8 @@ root.bind("<Key>", on_key)
 root.bind("<Control-l>", set_line_spacing)
 display_txt_files()  # Hiển thị danh sách file khi chạy chương trình
 root.bind("<Key>", on_key)
+
+# Hiển thị ảnh phía dưới với một ảnh mẫu ban đầu
+
+
 root.mainloop()
