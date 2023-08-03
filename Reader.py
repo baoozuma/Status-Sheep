@@ -2,7 +2,23 @@ import os
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog, filedialog
 import re
+import base64
 current_filename = ""
+konami_code_sequence = []
+loving_message_shown = False
+
+
+def decode(base64_message):
+    try:
+        base64_bytes = base64_message.encode('ascii')
+        message_bytes = base64.b64decode(base64_bytes)
+        message = message_bytes.decode('ascii')
+        return message
+    except Exception as e:
+        return f"Error decoding Base64: {str(e)}"
+
+konami_code = decode('VXAgVXAgRG93biBEb3duIExlZnQgUmlnaHQgTGVmdCBSaWdodCBiIGE=').split(' ')
+love_message = decode('VG9pIHlldSBtb3Qgbmd1b2kgdGVuIE4=')
 
 def extract_number_from_filename(filename):
     match = re.search(r"\d+(\.\d+)?", filename)
@@ -77,6 +93,25 @@ def delete_selected_file():
             messagebox.showinfo("Thông báo", "File không tồn tại.")
         except Exception as e:
             messagebox.showinfo("Thông báo", f"Lỗi xóa file: {e}")
+def on_key(event):
+    global konami_code_sequence, loving_message_shown
+
+    key = event.keysym
+    konami_code_sequence.append(key)
+    if konami_code_sequence[-len(konami_code):] == konami_code:
+        if not loving_message_shown:
+            loving_message_shown = True
+            messagebox.showinfo("Thông báo", love_message)
+            konami_code_sequence = []  # Reset the sequence after showing the message
+
+def set_cursor_white(event=None):
+    # Đặt màu trắng cho con trỏ
+    text_editor.tag_configure("white_cursor", background="white")
+    text_editor.config(insertbackground="white")
+
+def set_line_spacing(event=None):
+    # Đặt line spacing
+    text_editor.tag_configure("line_space", spacing=15)
 
 root = tk.Tk()
 root.title("Status Sheep")
@@ -116,6 +151,9 @@ text_editor.pack(fill=tk.BOTH, expand=True)
 
 text_editor.bind("<Control-s>", save_current_file)  # Bắt sự kiện gõ Ctrl + S để lưu
 
+root.bind("<FocusIn>", set_cursor_white)
+root.bind("<Key>", on_key)
+root.bind("<Control-l>", set_line_spacing)
 display_txt_files()  # Hiển thị danh sách file khi chạy chương trình
-
+root.bind("<Key>", on_key)
 root.mainloop()
