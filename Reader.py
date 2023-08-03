@@ -3,10 +3,9 @@ import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog, filedialog
 import re
 import base64
+
 current_filename = ""
 konami_code_sequence = []
-loving_message_shown = False
-
 
 def decode(base64_message):
     try:
@@ -42,7 +41,6 @@ def load_selected_file(event=None):
     global current_filename
     selected_index = files_list.curselection()
     if not selected_index:
-        messagebox.showinfo("Thông báo", "Hãy chọn một file để xem nội dung.")
         return
 
     filename = files_list.get(selected_index)
@@ -54,6 +52,7 @@ def load_selected_file(event=None):
         current_filename = filename
     except FileNotFoundError:
         messagebox.showinfo("Thông báo", "File không tồn tại.")
+
 def save_current_file(event=None):
     global current_filename
     if not current_filename:
@@ -93,16 +92,15 @@ def delete_selected_file():
             messagebox.showinfo("Thông báo", "File không tồn tại.")
         except Exception as e:
             messagebox.showinfo("Thông báo", f"Lỗi xóa file: {e}")
+
 def on_key(event):
-    global konami_code_sequence, loving_message_shown
+    global konami_code_sequence
 
     key = event.keysym
     konami_code_sequence.append(key)
     if konami_code_sequence[-len(konami_code):] == konami_code:
-        if not loving_message_shown:
-            loving_message_shown = True
-            messagebox.showinfo("Thông báo", love_message)
-            konami_code_sequence = []  # Reset the sequence after showing the message
+        messagebox.showinfo("Thông báo", love_message)
+        konami_code_sequence = []  # Reset the sequence after showing the message
 
 def set_cursor_white(event=None):
     # Đặt màu trắng cho con trỏ
@@ -113,43 +111,89 @@ def set_line_spacing(event=None):
     # Đặt line spacing
     text_editor.tag_configure("line_space", spacing=15)
 
+def rename_selected_file():
+    global current_filename
+    selected_index = files_list.curselection()
+    if not selected_index:
+        messagebox.showinfo("Thông báo", "Hãy chọn một file để đổi tên.")
+        return
+
+    old_filename = files_list.get(selected_index)
+    new_filename = simpledialog.askstring("Đổi tên file", "Nhập tên mới:", initialvalue=old_filename)
+    if new_filename is not None and new_filename.strip():
+        old_file_path = f"Vol/{old_filename}.txt"
+        new_file_path = f"Vol/{new_filename}.txt"
+
+        try:
+            os.rename(old_file_path, new_file_path)
+            messagebox.showinfo("Thông báo", f"File {old_filename}.txt đã được đổi tên thành {new_filename}.txt.")
+            current_filename = new_filename
+            display_txt_files()
+        except FileExistsError:
+            messagebox.showinfo("Thông báo", f"File {new_filename}.txt đã tồn tại. Vui lòng chọn tên khác.")
+        except FileNotFoundError:
+            messagebox.showinfo("Thông báo", "File không tồn tại.")
+        except Exception as e:
+            messagebox.showinfo("Thông báo", f"Lỗi đổi tên file: {e}")
+
+def refresh_files_list():
+    display_txt_files()
+
+def button_hover(event):
+    event.widget.config(background="#1e90ff")
+
+def button_leave(event):
+    event.widget.config(background="#272727")
+    
 root = tk.Tk()
 root.title("Status Sheep")
-root.geometry("600x400")
-
+root.geometry("800x600")
 # Tạo theme và font
 style = ttk.Style(root)
 style.theme_use("clam")  # Chọn theme, có thể thay bằng "clam", "alt", "default", "classic", "vista", "xpnative"
-style.configure(".", font=('Questrial', 12), foreground='white', background='#272727')  # Cấu hình font và màu cho tất cả các widget
+style.configure(".", font=('Segoe UI', 12), foreground='white', background='#272727')  # Cấu hình font và màu cho tất cả các widget
 
 frame_top = ttk.Frame(root)
 frame_top.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
-files_list = tk.Listbox(frame_top, width=40, height=10, selectmode=tk.SINGLE, font=('Questrial', 12), foreground='white', background='#272727')
+files_list = tk.Listbox(frame_top, width=40, height=10, selectmode=tk.SINGLE, font=('Segoe UI', 12), foreground='white', background='#272727')
 files_list.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
 frame_buttons = ttk.Frame(frame_top)
 frame_buttons.pack(side=tk.LEFT, padx=10)
 
-btn_load = ttk.Button(frame_buttons, text="Xem nội dung", command=load_selected_file, style='my.TButton')
-btn_load.pack(pady=5)
-
-btn_new = ttk.Button(frame_buttons, text="Tạo file mới", command=create_new_txt_file, style='my.TButton')
+btn_new = ttk.Button(frame_buttons, text="New File", command=create_new_txt_file, style='my.TButton')
 btn_new.pack(pady=5)
+btn_new.bind("<Enter>", button_hover)
+btn_new.bind("<Leave>", button_leave)
 
-btn_delete = ttk.Button(frame_buttons, text="Xóa file", command=delete_selected_file, style='my.TButton')
+btn_delete = ttk.Button(frame_buttons, text="Delete", command=delete_selected_file, style='my.TButton')
 btn_delete.pack(pady=5)
+btn_delete.bind("<Enter>", button_hover)
+btn_delete.bind("<Leave>", button_leave)
+
+btn_rename = ttk.Button(frame_buttons, text="Rename", command=rename_selected_file, style='my.TButton')
+btn_rename.pack(pady=5)
+btn_rename.bind("<Enter>", button_hover)
+btn_rename.bind("<Leave>", button_leave)
+
+btn_refresh = ttk.Button(frame_buttons, text="Refresh", command=refresh_files_list, style='my.TButton')
+btn_refresh.pack(pady=5)
+btn_refresh.bind("<Enter>", button_hover)
+btn_refresh.bind("<Leave>", button_leave)
 
 # Định nghĩa style cho button
-style.configure('my.TButton', font=('Questrial', 12), foreground='black', background='#1e90ff', padding=10)
+style.configure('my.TButton', font=('Segoe UI', 12), foreground='black', background='#1e90ff', padding=10)
 
 frame_bottom = ttk.Frame(root)
 frame_bottom.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
-text_editor = tk.Text(frame_bottom, wrap=tk.WORD, font=('Questrial', 12), foreground='white', background='#272727')
+text_editor = tk.Text(frame_bottom, wrap=tk.WORD, font=('Segoe UI', 12), foreground='white', background='#272727')
 text_editor.pack(fill=tk.BOTH, expand=True)
 
 text_editor.bind("<Control-s>", save_current_file)  # Bắt sự kiện gõ Ctrl + S để lưu
+
+files_list.bind("<ButtonRelease-1>", load_selected_file)  # Binding sự kiện click vào item trong list để hiển thị nội dung
 
 root.bind("<FocusIn>", set_cursor_white)
 root.bind("<Key>", on_key)

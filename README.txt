@@ -1,3 +1,0 @@
-Để dễ đọc hơn, hãy chạy file Reader.py bằng Python nhé.
-Chỉ dành cho những kẻ đã từng yêu và được yêu.
-No hate, stressful. Relax...
