@@ -3,7 +3,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog, filedialog
 import re
 import base64
-from PIL import Image, ImageTk
+
+
 
 current_filename = ""
 konami_code_sequence = []
