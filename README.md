@@ -1,6 +1,8 @@
 Để dễ đọc hơn, hãy chạy file Reader.py bằng Python nhé.
 Lưu ý: máy tính bạn phải có tải Python phiên bản mới nhất, ngoài ra, hãy mở terminal trên máy tính bạn và gõ lệnh sau:
-pip install pillow
+
+pip install pygame
+
 Vậy thôi
 
 Chỉ dành cho những kẻ đã từng yêu và được yêu.
