@@ -11,7 +11,7 @@ Vậy thôi
 
 Chỉ dành cho những kẻ đã từng yêu và được yêu. 
 
-Tôi đã làm ra ứng dụng đơn này chỉ trong hai ngày, khi tôi nhớ đến em.
+Tôi đã làm ra game đơn này chỉ trong hai ngày, khi tôi nhớ đến em.
 
 Hi vọng bạn sẽ có những trải nghiệm trọn vẹn và tuyệt vời nhất nhé.
 
