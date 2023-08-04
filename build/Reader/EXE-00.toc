@@ -58,7 +58,11 @@
  [],
  False,
  False,
+<<<<<<< HEAD
  1691140848,
+=======
+ 1691140171,
+>>>>>>> c53e053c9db3ac1b58a8a564002eafe95b274ea3
  [('run.exe',
    'C:\\Users\\WIN10\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
    'EXECUTABLE')])

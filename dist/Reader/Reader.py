@@ -23,6 +23,10 @@ next_message = Solver("Vm0wd2QyUXlWa1pOVldoVFlteEtXRmxVU205V1JsbDNXa1pPVlUxV2NEQ
 reverse = Solver("YSBiIFJpZ2h0IExlZnQgUmlnaHQgTGVmdCBEb3duIERvd24gVXAgVXA=").getCode().split(" ")
 final = Solver("biBnIG8gc3BhY2UgbiBoIGEgdCBzcGFjZSBuIGcgaCBp").getCode().split(" ")
 final_second = Solver("TiBnIG8gc3BhY2UgTiBoIGEgdCBzcGFjZSBOIGcgaCBp").getCode().split(" ")
+<<<<<<< HEAD
+=======
+print(final)
+>>>>>>> c53e053c9db3ac1b58a8a564002eafe95b274ea3
 final_message = Solver("V2VsbCwgY+G6rXUgxJHDoyBjaGnhur9uIHRo4bqvbmcgdHJvbmcgbMOybmcgdOG7myBy4buTaS4gQ8OybiBnw6wgbuG7r2EgbcOgIGPhuq11IGNoxrBhIGJp4bq/dCB24buBIHThu5sgbuG7r2Ega2jDtG5nIG5o4buJPyDEkMOieSBsw6AgXCJWb2wuIEVuZFwiIC0gYuG7qWMgdGjGsCBjdeG7kWkgY8O5bmcgY+G7p2EgdOG7mywgaMOjeSDEkeG7jWMgbsOzIHRo4bqtdCBrxKkgbmjDqSwgdsOsIHNhdSBraGkgY+G6rXUgdOG6r3QgY2jGsMahbmcgdHLDrG5oLCB04bqldCBj4bqjIGPDoWMgdGjGsCDhu58gxJHDonkgdHJvbmcgbsOgeSBz4bq9IGLhu4sgeMOzYSBo4bq/dCDEkeG6pXkuLi4gRMO5IHNhbyB0aMOsLCDEkcOieSBsw6AgcGjhuqduIHRoxrDhu59uZyBj4bunYSBj4bqtdSwgY2jDumMgbeG7q25nIG5ow6kh").getCode()
 def extract_number_from_filename(filename):
     match = re.search(r"\d+(\.\d+)?", filename)
