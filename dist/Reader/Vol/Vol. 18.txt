@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Khi ở nơi nào đó, tâm trạng em cảm thấy không ổn, lo lắng, bất an hay ngồi hoài mãi với chiếc điện thoại.
 
 9
@@ -10,3 +11,16 @@ Hãy đi đến nơi khiến em thoải mái nhất, dễ chịu và tự do. Đ
 
 21
 
+=======
+Khi ở nơi nào đó, tâm trạng em cảm thấy không ổn, lo lắng, bất an hay ngồi hoài mãi với chiếc điện thoại.
+
+9
+
+Hãy rời khỏi nơi đó đi, chẳng biết là ở đâu nhưng nó sẽ làm em thoải mái hơn là đứng lại mãi một chỗ. Vì cái nguồn năng lượng tiêu cực nó sẽ tồn tại mãi nếu em cứ ở yên chốn đấy.
+
+1309019019
+
+Hãy đi đến nơi khiến em thoải mái nhất, dễ chịu và tự do. Đừng để ai phải khiến em mệt mỏi, vì cuộc đời em vốn đã quá đủ rồi...
+
+21
+>>>>>>> 4d94b56005d791afe5860155fa3ec5f32f9456c8

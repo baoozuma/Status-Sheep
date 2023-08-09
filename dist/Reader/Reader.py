@@ -11,7 +11,10 @@ current_filename = ""
 konami_code_sequence = []
 code_reverse = []
 custom_event_sequence = []
+<<<<<<< HEAD
 easter_event_sequence = []
+=======
+>>>>>>> 4d94b56005d791afe5860155fa3ec5f32f9456c8
 secret = ["Vol. 16","Vol. 17","Vol. End"]
 secret_dict = {
     "Vol. 16": False,
@@ -24,8 +27,16 @@ next_message = Solver("Vm0wd2QyUXlWa1pOVldoVFlteEtXRmxVU205V1JsbDNXa1pPVlUxV2NEQ
 reverse = Solver("YSBiIFJpZ2h0IExlZnQgUmlnaHQgTGVmdCBEb3duIERvd24gVXAgVXA=").getCode().split(" ")
 final = Solver("biBnIG8gc3BhY2UgbiBoIGEgdCBzcGFjZSBuIGcgaCBp").getCode().split(" ")
 final_second = Solver("TiBnIG8gc3BhY2UgTiBoIGEgdCBzcGFjZSBOIGcgaCBp").getCode().split(" ")
+<<<<<<< HEAD
 final_message = Solver("V2VsbCwgY+G6rXUgxJHDoyBjaGnhur9uIHRo4bqvbmcgdHJvbmcgbMOybmcgdOG7myBy4buTaS4gQ8OybiBnw6wgbuG7r2EgbcOgIGPhuq11IGNoxrBhIGJp4bq/dCB24buBIHThu5sgbuG7r2Ega2jDtG5nIG5o4buJPyDEkMOieSBsw6AgXCJWb2wuIEVuZFwiIC0gYuG7qWMgdGjGsCBjdeG7kWkgY8O5bmcgY+G7p2EgdOG7mywgaMOjeSDEkeG7jWMgbsOzIHRo4bqtdCBrxKkgbmjDqSwgdsOsIHNhdSBraGkgY+G6rXUgdOG6r3QgY2jGsMahbmcgdHLDrG5oLCB04bqldCBj4bqjIGPDoWMgdGjGsCDhu58gxJHDonkgdHJvbmcgbsOgeSBz4bq9IGLhu4sgeMOzYSBo4bq/dCDEkeG6pXkuLi4gRMO5IHNhbyB0aMOsLCDEkcOieSBsw6AgcGjhuqduIHRoxrDhu59uZyBj4bunYSBj4bqtdSwgY2jDumMgbeG7q25nIG5ow6kh").getCode()
 easter = Solver("aSBzcGFjZSBtIGkgcyBzIHNwYWNlIHU=").getCode().split(" ")
+=======
+<<<<<<< HEAD
+=======
+print(final)
+>>>>>>> c53e053c9db3ac1b58a8a564002eafe95b274ea3
+final_message = Solver("V2VsbCwgY+G6rXUgxJHDoyBjaGnhur9uIHRo4bqvbmcgdHJvbmcgbMOybmcgdOG7myBy4buTaS4gQ8OybiBnw6wgbuG7r2EgbcOgIGPhuq11IGNoxrBhIGJp4bq/dCB24buBIHThu5sgbuG7r2Ega2jDtG5nIG5o4buJPyDEkMOieSBsw6AgXCJWb2wuIEVuZFwiIC0gYuG7qWMgdGjGsCBjdeG7kWkgY8O5bmcgY+G7p2EgdOG7mywgaMOjeSDEkeG7jWMgbsOzIHRo4bqtdCBrxKkgbmjDqSwgdsOsIHNhdSBraGkgY+G6rXUgdOG6r3QgY2jGsMahbmcgdHLDrG5oLCB04bqldCBj4bqjIGPDoWMgdGjGsCDhu58gxJHDonkgdHJvbmcgbsOgeSBz4bq9IGLhu4sgeMOzYSBo4bq/dCDEkeG6pXkuLi4gRMO5IHNhbyB0aMOsLCDEkcOieSBsw6AgcGjhuqduIHRoxrDhu59uZyBj4bunYSBj4bqtdSwgY2jDumMgbeG7q25nIG5ow6kh").getCode()
+>>>>>>> 4d94b56005d791afe5860155fa3ec5f32f9456c8
 def extract_number_from_filename(filename):
     match = re.search(r"\d+(\.\d+)?", filename)
     if match:
@@ -122,7 +133,11 @@ def on_key(event):
     key = event.keysym
     konami_code_sequence.append(key)
     if konami_code_sequence[-len(konami_code):] == konami_code:
+<<<<<<< HEAD
 
+=======
+        threading.Thread(target=love_message).start()
+>>>>>>> 4d94b56005d791afe5860155fa3ec5f32f9456c8
         messagebox.showinfo("Thông báo", love_message)
         secret_dict["Vol. 16"] = True
         display_txt_files()
@@ -132,10 +147,15 @@ def on_reverse(event):
     key = event.keysym
     code_reverse.append(key)
     if code_reverse[-len(reverse):] == reverse:
+<<<<<<< HEAD
+=======
+        threading.Thread(target=love_message).start()
+>>>>>>> 4d94b56005d791afe5860155fa3ec5f32f9456c8
         messagebox.showinfo("Thông báo", next_message)
         secret_dict["Vol. 17"] = True
         display_txt_files()
         code_reverse = [] 
+<<<<<<< HEAD
 def on_easter(event): 
     global easter_event_sequence
     key = event.keysym
@@ -147,6 +167,8 @@ def on_easter(event):
         pygame.mixer.music.play()
         messagebox.showinfo("Thông báo", "Tớ thực sự nhớ cậu rất nhiều luôn ấy, mỗi lần nghĩ đến cậu lại làm trái tim tớ bình yên đến lạ kì")   
         easter_event_sequence = []
+=======
+>>>>>>> 4d94b56005d791afe5860155fa3ec5f32f9456c8
 def on_final_event(event):
     global custom_event_sequence
     key = event.keysym
@@ -282,7 +304,10 @@ root.bind("<Control-l>", set_line_spacing)
 display_txt_files()  # Hiển thị danh sách file khi chạy chương trình
 root.bind("<Key>", on_key)
 root.bind("<Key>", on_reverse, add="+")
+<<<<<<< HEAD
 root.bind("<Key>", on_easter,add="+")
+=======
+>>>>>>> 4d94b56005d791afe5860155fa3ec5f32f9456c8
 root.bind("<Key>", on_final_event,add="+")
 
 
